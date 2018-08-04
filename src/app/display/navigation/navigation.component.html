@@ -1,0 +1,11 @@
+<nav>
+    <h1>
+        My Recipes
+    </h1>
+    <div class="space"></div>
+    <ul>
+        <li *ngFor="let link of links">
+            <a routerLink="{{link.url}}">{{link.name | uppercase}}</a>
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,32 @@
+nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: grey;
+    padding: 10px;
+    h1 {
+        display: inline-block;
+    }
+    .space {
+        flex: 1 1 auto;
+    }
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        li {
+            float: left;
+            a {
+                display: block;
+                color: black;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                &:hover {
+                    color: red;
+                }
+            }
+        }
+    }
+}

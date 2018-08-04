@@ -1,0 +1,13 @@
+<div class="container">
+    <button (click)="goBack()">Back</button>
+    <h2>{{recipe.name}}</h2>
+    <div class="recipe">
+        <div><span>Duration: </span>{{recipe.time}}</div>
+        <div><span>Created on: </span>{{recipe.dateOfCreation}}</div>
+        <div><span>Ingredients:</span>
+            <ul *ngFor="let ingredient of recipe.ingredients">
+                <li>{{ingredient}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
