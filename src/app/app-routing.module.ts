@@ -1,8 +1,8 @@
 import { MyAccountComponent } from './my-account/my-account.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RecipesComponent } from './recipes/recipes.component';
-import { RecipeComponent } from './recipe/recipe.component';
+import { RecipesComponent } from './recipes/recipes-list/recipes.component';
+import { RecipeComponent } from './recipes/recipe/recipe.component';
 
 const routes: Routes = [
   { path: 'recipes', component: RecipesComponent },
