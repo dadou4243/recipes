@@ -1,3 +1,4 @@
+import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -8,6 +9,7 @@ const routes: Routes = [
   { path: 'recipes', component: RecipesComponent },
   { path: 'recipes/:id', component: RecipeComponent},
   { path: 'account', component: MyAccountComponent },
+  { path: 'create', component: AddRecipeComponent },
   { path: '',
     redirectTo: '/recipes',
     pathMatch: 'full'

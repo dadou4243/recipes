@@ -13,7 +13,7 @@ export class RecipesComponent implements OnInit {
   recipes: Recipe[];
 
   constructor(
-    private recipeService: RecipesService
+    private recipesService: RecipesService
   ) { }
 
   ngOnInit() {
@@ -21,8 +21,12 @@ export class RecipesComponent implements OnInit {
   }
 
   getRecipes(): void {
-    this.recipeService.getRecipes()
-        .subscribe(heroes => this.recipes = heroes);
+    this.recipesService.getRecipes()
+        .subscribe(recipes => this.recipes = recipes);
+  }
+
+  deleteRecipe(id) {
+    this.recipesService.deleteRecipe(id);
   }
 
 }

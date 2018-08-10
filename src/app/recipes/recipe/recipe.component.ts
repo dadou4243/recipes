@@ -19,10 +19,10 @@ export class RecipeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getHero();
+    this.getRecipe();
   }
 
-  getHero(): void {
+  getRecipe(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.recipe = RECIPES.find(recipe => recipe.id === id);
   }

@@ -13,11 +13,25 @@ export class RecipesService {
   recipes;
 
   constructor() {
-    this.getRecipes
+    this.getRecipes();
   }
 
-  getRecipes(){
+  getRecipes() {
     this.recipes = of(RECIPES);
     return this.recipes;
+  }
+
+  addRecipe(recipe) {
+    recipe.id = Math.floor(Math.random() * 10000);
+    RECIPES.push(recipe);
+    // this.recipes.subscribe(value => {
+    //   console.log(value);
+    // });
+  }
+
+  deleteRecipe(id) {
+    console.log('delete recipe', id);
+    const index = RECIPES.indexOf(RECIPES.find(elem => elem.id === id));
+    RECIPES.splice(index, 1);
   }
 }

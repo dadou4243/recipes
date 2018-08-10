@@ -1,7 +1,7 @@
 export interface Recipe {
     id: number;
     name: string;
-    time: number;
+    duration: number;
     category?: string;
     level?: string;
     cost?: string;

@@ -9,14 +9,18 @@ export class LeftMenuComponent implements OnInit {
 
   links = [
     {
-      name: "My Recipes",
-      url: "recipes"
+      name: 'My Recipes',
+      url: 'recipes'
     },
     {
-      name: "My Account",
-      url: "account"
+      name: 'My Account',
+      url: 'account'
+    },
+    {
+      name: 'Create a recipe',
+      url: 'create'
     }
-  ]
+  ];
 
   constructor() { }
 

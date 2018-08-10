@@ -2,7 +2,7 @@ import { LeftMenuComponent } from './display/left-menu/left-menu.component';
 import { NavigationComponent } from './display/navigation/navigation.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
@@ -11,6 +11,7 @@ import { RecipeComponent } from './recipes/recipe/recipe.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
 
 
 @NgModule({
@@ -20,11 +21,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RecipeComponent,
     NavigationComponent,
     MyAccountComponent,
-    LeftMenuComponent
+    LeftMenuComponent,
+    AddRecipeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule
   ],
