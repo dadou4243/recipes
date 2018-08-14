@@ -25,8 +25,10 @@ export class RecipesComponent implements OnInit {
         .subscribe(recipes => this.recipes = recipes);
   }
 
-  deleteRecipe(id) {
+  deleteRecipe(id, event) {
+    event.stopPropagation();
     this.recipesService.deleteRecipe(id);
+
   }
 
 }

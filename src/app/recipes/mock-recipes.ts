@@ -5,37 +5,42 @@ export const RECIPES: Recipe[] = [
         id: 11,
         name: 'Caesar Salad',
         duration: 10,
-        dateOfCreation: 20,
+        createdAt: 20,
         ingredients: [
             'tomato',
             'basilicum',
             'cucumber'
-        ]
+        ],
+        image: 'caesarSalad.jpg'
     },
     {
         id: 12,
-        name: 'Pancanela',
+        name: 'Panzanella',
         duration: 20,
-        dateOfCreation: 20,
+        createdAt: 20,
         ingredients: [
             'tomato',
             'basilicum',
             'cucumber'
-        ]    },
+        ],
+        image: 'panzanella.jpg'
+      },
     { id: 13,
         name: 'Caprese',
         duration: 15,
-        dateOfCreation: 20,
+        createdAt: 20,
         ingredients: [
             'tomato',
             'basilicum',
             'cucumber'
-        ]    },
+        ],
+        image: 'capreseSalad.jpeg'
+      },
     {
         id: 14,
         name: 'Lasagna Dela Casa',
         duration: 10,
-        dateOfCreation: 20,
+        createdAt: 20,
         ingredients: [
             'tomato',
             'basilicum',
@@ -45,7 +50,7 @@ export const RECIPES: Recipe[] = [
         id: 15,
         name: 'Green Salad',
         duration: 10,
-        dateOfCreation: 20,
+        createdAt: 20,
         ingredients: [
             'tomato',
             'basilicum',
@@ -55,7 +60,7 @@ export const RECIPES: Recipe[] = [
         id: 16,
         name: 'Margharitta Pizza',
         duration: 10,
-        dateOfCreation: 20,
+        createdAt: 20,
         ingredients: [
             'tomato',
             'basilicum',
@@ -65,7 +70,7 @@ export const RECIPES: Recipe[] = [
         id: 17,
         name: 'Spaghetti Bolognese',
         duration: 10,
-        dateOfCreation: 20,
+        createdAt: 20,
         ingredients: [
             'tomato',
             'basilicum',

@@ -10,23 +10,20 @@ import { Observable, of } from 'rxjs';
 
 export class RecipesService {
 
-  recipes;
+  recipes: Observable<Recipe[]>;
 
   constructor() {
     this.getRecipes();
   }
 
   getRecipes() {
-    this.recipes = of(RECIPES);
-    return this.recipes;
+    return this.recipes = of(RECIPES);
   }
 
   addRecipe(recipe) {
     recipe.id = Math.floor(Math.random() * 10000);
     RECIPES.push(recipe);
-    // this.recipes.subscribe(value => {
-    //   console.log(value);
-    // });
+    console.log(RECIPES);
   }
 
   deleteRecipe(id) {

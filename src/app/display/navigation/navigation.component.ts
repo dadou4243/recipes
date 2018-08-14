@@ -9,10 +9,18 @@ export class NavigationComponent implements OnInit {
 
   links = [
     {
-      name: "test",
-      url: ""
+      name: 'My Recipes',
+      url: 'recipes'
+    },
+    {
+      name: 'Explore',
+      url: 'explore'
+    },
+    {
+      name: 'Create a recipe',
+      url: 'create'
     }
-  ]
+  ];
 
   constructor() { }
 

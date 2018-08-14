@@ -1,15 +1,53 @@
-<form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+<div class="container">
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
 
-    <label>
-    Name:
-    <input type="text" formControlName="name">
-  </label>
+        <div>
+            <label>
+              Name:
+              <input type="text" formControlName="name" required>
+            </label>
+            <div>
+                <label>
+        Duration:
+        <input type="text" formControlName="duration" required>
+      </label>
+            </div>
 
-    <label>
-    Duration:
-    <input type="text" formControlName="duration">
-  </label>
 
-    <button type="submit" [disabled]="!recipeForm.valid">Submit</button>
+        </div>
 
-</form>
+        <div>
+            <label>
+                Ingredients:
+                <input type="text" formControlName="ingredients">
+              </label>
+        </div>
+
+        <div>
+            <label>
+                Category:
+                  <select formControlName="category" placeholder="Select a category" required>
+                    <option value="salad">Salad</option>
+                    <option value="hotMeal">Hot Meal</option>
+                    <option value="desert">Desert</option>
+                    <option value="sauce">Sauce</option>
+                  </select>
+              </label>
+        </div>
+
+        <div>
+            <label>
+            Steps
+          </label>
+        </div>
+
+        <div>
+            <input type="file">
+        </div>
+
+        <button type="submit">Reset</button>
+        <button type="submit" [disabled]="!recipeForm.valid">Submit</button>
+
+
+    </form>
+</div>

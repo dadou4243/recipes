@@ -3,7 +3,7 @@
     <h2>{{recipe.name}}</h2>
     <div class="recipe">
         <div><span>Duration: </span>{{recipe.duration}}</div>
-        <div><span>Created on: </span>{{recipe.dateOfCreation}}</div>
+        <div><span>Created on: </span>{{recipe.createdAt}}</div>
         <div><span>Ingredients:</span>
             <ul *ngFor="let ingredient of recipe.ingredients">
                 <li>{{ingredient}}</li>

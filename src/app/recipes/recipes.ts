@@ -7,7 +7,7 @@ export interface Recipe {
     cost?: string;
     image?: string;
     quantity?: number;
-    dateOfCreation: any;
+    createdAt: any;
     ingredients: any[];
     author?: string;
 }

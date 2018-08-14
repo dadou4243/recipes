@@ -1,12 +1,30 @@
+@import '~sass/_variables.scss';
 nav {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-color: grey;
-    padding: 10px;
+    background-color: $headerColor;
+    padding: 0 30px;
     h1 {
-        display: inline-block;
+        a {
+            font-family: 'Nunito', sans-serif;
+            display: inline-block;
+            color: #ffffff;
+            margin-right: 40px;
+            text-decoration: none;
+        }
+    }
+    .search-bar {
+        margin-right: 50px;
+        input {
+            border: 0;
+            border-radius: 4px;
+            height: 40px;
+            padding: 5px 10px;
+            font-size: 15px;
+            width: 300px;
+        }
     }
     .space {
         flex: 1 1 auto;
@@ -19,14 +37,22 @@ nav {
             float: left;
             a {
                 display: block;
-                color: black;
+                color: #ffffff;
                 text-align: center;
                 padding: 14px 16px;
                 text-decoration: none;
                 &:hover {
-                    color: red;
+                    color: #aac0eb;
+                }
+                &.link-active {
+                    font-weight: bold;
                 }
             }
+        }
+    }
+    .profile-icons {
+        img {
+            height: 40px;
         }
     }
 }
