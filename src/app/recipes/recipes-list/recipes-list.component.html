@@ -1,7 +1,7 @@
 <div class="container">
     <h2>List of Recipes</h2>
-    <a *ngFor="let recipe of recipes">
-        <div class=" recipe " routerLink="/recipes/{{recipe.id}} ">
+    <a *ngFor="let recipe of recipes | async">
+        <div class="recipe" [routerLink]="['/recipes', recipe._id]">
             <div class="image ">
                 <img src="assets/images/{{recipe.image}} " *ngIf="recipe.image ">
                 <img src="assets/images/default.png " *ngIf="!recipe.image ">
@@ -13,4 +13,5 @@
             </div>
         </div>
     </a>
+    <router-outlet></router-outlet>
 </div>

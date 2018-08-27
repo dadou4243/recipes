@@ -4,7 +4,8 @@
     <div class="recipe">
         <div><span>Duration: </span>{{recipe.duration}}</div>
         <div><span>Created on: </span>{{recipe.createdAt}}</div>
-        <div><span>Ingredients:</span>
+        <div *ngIf="recipe.ingredients">
+            <span>Ingredients:</span>
             <ul *ngFor="let ingredient of recipe.ingredients">
                 <li>{{ingredient}}</li>
             </ul>

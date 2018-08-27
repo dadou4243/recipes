@@ -23,8 +23,8 @@ export class RecipeComponent implements OnInit {
   }
 
   getRecipe(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.recipe = RECIPES.find(recipe => recipe.id === id);
+    const id: string = +this.route.snapshot.paramMap.get('id');
+    this.recipe = RECIPES.find(recipe => recipe._id === id);
   }
 
   goBack(): void {

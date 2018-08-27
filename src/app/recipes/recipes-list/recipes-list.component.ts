@@ -4,13 +4,14 @@ import { Recipe } from '../recipes';
 import { RECIPES } from '../mock-recipes';
 
 @Component({
-  selector: 'app-recipes',
-  templateUrl: './recipes.component.html',
-  styleUrls: ['./recipes.component.scss']
+  selector: 'app-recipes-list',
+  templateUrl: './recipes-list.component.html',
+  styleUrls: ['./recipes-list.component.scss']
 })
 
-export class RecipesComponent implements OnInit {
-  recipes: Recipe[];
+export class RecipesListComponent implements OnInit {
+
+  recipes: any;
 
   constructor(
     private recipesService: RecipesService
@@ -21,14 +22,15 @@ export class RecipesComponent implements OnInit {
   }
 
   getRecipes(): void {
-    this.recipesService.getRecipes()
-        .subscribe(recipes => this.recipes = recipes);
+    this.recipes = this.recipesService.getRecipes();
+    this.recipes.subscribe(result => {
+      console.log(result);
+    });
   }
 
   deleteRecipe(id, event) {
     event.stopPropagation();
     this.recipesService.deleteRecipe(id);
-
   }
 
 }

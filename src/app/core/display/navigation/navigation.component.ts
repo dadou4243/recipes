@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-left-menu',
-  templateUrl: './left-menu.component.html',
-  styleUrls: ['./left-menu.component.scss']
+  selector: 'app-navigation',
+  templateUrl: './navigation.component.html',
+  styleUrls: ['./navigation.component.scss']
 })
-export class LeftMenuComponent implements OnInit {
+export class NavigationComponent implements OnInit {
 
   links = [
     {
@@ -13,12 +13,12 @@ export class LeftMenuComponent implements OnInit {
       url: 'recipes'
     },
     {
-      name: 'My Account',
-      url: 'account'
+      name: 'Explore',
+      url: 'explore'
     },
     {
       name: 'Create a recipe',
-      url: 'create'
+      url: 'recipes/create'
     }
   ];
 

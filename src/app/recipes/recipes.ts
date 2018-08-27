@@ -1,5 +1,4 @@
 export interface Recipe {
-    id: number;
     name: string;
     duration: number;
     category?: string;
@@ -10,4 +9,5 @@ export interface Recipe {
     createdAt: any;
     ingredients: any[];
     author?: string;
+    _id: string;
 }

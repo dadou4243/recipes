@@ -4,20 +4,24 @@ import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 
+import { HttpClient } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root',
 })
 
 export class RecipesService {
 
-  recipes: Observable<Recipe[]>;
+  API_URL = 'http://localhost:4600';
 
-  constructor() {
+  recipes: Observable<any>;
+
+  constructor(private http: HttpClient) {
     this.getRecipes();
   }
 
   getRecipes() {
-    return this.recipes = of(RECIPES);
+    return this.recipes = this.http.get(this.API_URL + '/api/recipes');
   }
 
   addRecipe(recipe) {
