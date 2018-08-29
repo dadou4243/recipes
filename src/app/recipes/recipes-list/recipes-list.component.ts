@@ -1,7 +1,6 @@
 import { RecipesService } from '../../services/recipes.service';
 import { Component, OnInit } from '@angular/core';
-import { Recipe } from '../recipes';
-import { RECIPES } from '../mock-recipes';
+import { Recipe } from '../recipes.model';
 
 @Component({
   selector: 'app-recipes-list',
@@ -11,7 +10,7 @@ import { RECIPES } from '../mock-recipes';
 
 export class RecipesListComponent implements OnInit {
 
-  recipes: any;
+  recipes: Recipe[];
 
   constructor(
     private recipesService: RecipesService
@@ -22,15 +21,22 @@ export class RecipesListComponent implements OnInit {
   }
 
   getRecipes(): void {
-    this.recipes = this.recipesService.getRecipes();
-    this.recipes.subscribe(result => {
+    this.recipesService.getRecipes().subscribe(result => {
       console.log(result);
-    });
+      this.recipes = result;
+    }
+  );
   }
+
 
   deleteRecipe(id, event) {
     event.stopPropagation();
-    this.recipesService.deleteRecipe(id);
+    this.recipesService.deleteRecipe(id).subscribe(
+      () => {
+        const pos = this.recipes.map(elem => elem._id).indexOf(id);
+        this.recipes.splice(pos, 1);
+      }
+    );
   }
 
 }

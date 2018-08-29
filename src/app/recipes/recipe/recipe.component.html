@@ -1,14 +1,20 @@
 <div class="container">
-    <button (click)="goBack()">Back</button>
-    <h2>{{recipe.name}}</h2>
-    <div class="recipe">
-        <div><span>Duration: </span>{{recipe.duration}}</div>
-        <div><span>Created on: </span>{{recipe.createdAt}}</div>
-        <div *ngIf="recipe.ingredients">
-            <span>Ingredients:</span>
-            <ul *ngFor="let ingredient of recipe.ingredients">
-                <li>{{ingredient}}</li>
-            </ul>
+    <div *ngIf='recipe'>
+        <button (click)="goBack()">Back</button>
+        <div class="recipe">
+            <h2>{{recipe.name}}</h2>
+            <div class="image ">
+                <img src="assets/images/{{recipe.image}} " *ngIf="recipe.image ">
+                <img src="assets/images/default.png " *ngIf="!recipe.image ">
+            </div>
+            <div><span>Duration: </span>{{recipe.duration}}</div>
+            <div><span>Created on: </span>{{recipe.createdAt}}</div>
+            <div *ngIf="recipe.ingredients">
+                <span>Ingredients:</span>
+                <ul *ngFor="let ingredient of recipe.ingredients">
+                    <li>{{ingredient}}</li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

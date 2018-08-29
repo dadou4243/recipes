@@ -10,7 +10,7 @@ export class NavigationComponent implements OnInit {
   links = [
     {
       name: 'My Recipes',
-      url: 'recipes'
+      url: 'recipes/list'
     },
     {
       name: 'Explore',

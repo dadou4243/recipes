@@ -1,8 +1,9 @@
+import { RecipesService } from './../../services/recipes.service';
 import { Component, OnInit } from '@angular/core';
-import { RECIPES } from '../mock-recipes';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Recipe } from '../recipes';
+import { Recipe } from '../recipes.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-recipe',
@@ -11,9 +12,11 @@ import { Recipe } from '../recipes';
 })
 export class RecipeComponent implements OnInit {
 
+  recipeObservable: Observable<any>;
   recipe: Recipe;
 
   constructor(
+    private recipesService: RecipesService,
     private route: ActivatedRoute,
     private location: Location
   ) { }
@@ -23,8 +26,13 @@ export class RecipeComponent implements OnInit {
   }
 
   getRecipe(): void {
-    const id: string = +this.route.snapshot.paramMap.get('id');
-    this.recipe = RECIPES.find(recipe => recipe._id === id);
+    const id: string = this.route.snapshot.paramMap.get('id');
+    console.log(id);
+    this.recipeObservable = this.recipesService.getRecipe(id);
+    this.recipeObservable.subscribe(result => {
+      this.recipe = result;
+      console.log(result);
+    });
   }
 
   goBack(): void {

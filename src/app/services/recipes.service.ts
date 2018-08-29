@@ -1,8 +1,7 @@
-import { Recipe } from '../recipes/recipes';
-import { RECIPES } from '../recipes/mock-recipes';
+import { Recipe } from '../recipes/recipes.model';
 import { Injectable } from '@angular/core';
 
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { HttpClient } from '@angular/common/http';
 
@@ -14,25 +13,27 @@ export class RecipesService {
 
   API_URL = 'http://localhost:4600';
 
-  recipes: Observable<any>;
-
   constructor(private http: HttpClient) {
     this.getRecipes();
   }
 
-  getRecipes() {
-    return this.recipes = this.http.get(this.API_URL + '/api/recipes');
+  getRecipes(): Observable<Recipe[]> {
+    return this.http.get<Recipe[]>(this.API_URL + '/api/recipes');
   }
 
-  addRecipe(recipe) {
-    recipe.id = Math.floor(Math.random() * 10000);
-    RECIPES.push(recipe);
-    console.log(RECIPES);
+  getRecipe(id): Observable<Recipe> {
+    return this.http.get<Recipe>(this.API_URL + '/api/recipes/' + id);
+  }
+
+  addRecipe(recipe): Observable<Recipe>  {
+    return this.http.post<Recipe>(this.API_URL + '/api/recipes', recipe);
   }
 
   deleteRecipe(id) {
-    console.log('delete recipe', id);
-    const index = RECIPES.indexOf(RECIPES.find(elem => elem.id === id));
-    RECIPES.splice(index, 1);
+    return this.http.delete(this.API_URL + '/api/recipes/' + id);
+  }
+
+  getIngredients(): Observable<any[]> {
+    return this.http.get<any[]>(this.API_URL + '/api/ingredients');
   }
 }

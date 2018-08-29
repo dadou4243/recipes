@@ -1,6 +1,6 @@
 <div class="container">
     <h2>List of Recipes</h2>
-    <a *ngFor="let recipe of recipes | async">
+    <a *ngFor="let recipe of recipes">
         <div class="recipe" [routerLink]="['/recipes', recipe._id]">
             <div class="image ">
                 <img src="assets/images/{{recipe.image}} " *ngIf="recipe.image ">
@@ -9,7 +9,7 @@
             <div class="content "><span>Name: </span>{{recipe.name}}
                 <div><span>Duration: </span>{{recipe.duration}}</div>
                 <div><span>Created on: </span>{{recipe.createdAt | date}}</div>
-                <div><button (click)="deleteRecipe(recipe.id, $event) ">Delete</button></div>
+                <div><button (click)="deleteRecipe(recipe._id, $event) ">Delete</button></div>
             </div>
         </div>
     </a>

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 @import './_variables';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 * {
     box-sizing: border-box;
 }
@@ -14,6 +15,16 @@ body {
     overflow: hidden;
     color: $black;
     background-color: $greyLight;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 html,

@@ -1,16 +1,21 @@
 const mongoose = require('mongoose');
 
 const recipeSchema = new mongoose.Schema({
+    id: mongoose.Schema.Types.ObjectId,
     name: String,
-    id: Number,
     description: String,
     image: {
         type: String,
         default: ''
     },
-    category: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'category'
+    createdAt: Date,
+    category: {
+        type: String
+    },
+    ingredients: [{
+        name: String,
+        quantity: Number,
+        unit: String
     }]
 });
 

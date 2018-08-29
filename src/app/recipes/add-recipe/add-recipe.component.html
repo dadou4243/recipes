@@ -1,38 +1,50 @@
 <div class="container">
-    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+    <h1>Add a recipe</h1>
+    <form [formGroup]="recipeForm">
 
-        <div>
-            <label>
-              Name:
-              <input type="text" formControlName="name" required>
-            </label>
-            <div>
-                <label>
-        Duration:
-        <input type="text" formControlName="duration" required>
-      </label>
+        <mat-form-field class="form-field">
+            <input type="text" matInput placeholder="Name" formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <input type="text" matInput placeholder="Duration" formControlName="duration">
+        </mat-form-field>
+
+        <div class="ingredients" formArrayName="ingredients">
+            <h3>Ingredients</h3>
+            <div *ngFor="let ingredient of ingredientsForm.controls; let i=index" [formGroupName]="i">
+                <mat-form-field>
+                    <input type="text" placeholder="Name" aria-label="Number" matInput formControlName="name" [matAutocomplete]="auto">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                        <mat-option *ngFor="let ingr of filteredIngredients[i] | async" [value]="ingr">
+                            {{ingr}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="text" placeholder="Quantity" matInput formControlName="quantity">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-select placeholder="Units">
+                        <mat-option *ngFor="let unit of units" [value]="unit">
+                            {{unit.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button *ngIf="i>0" (click)="deleteIngredient(i)">Delete</button>
             </div>
-
-
+            <button (click)="addIngredient()">Add Ingredient</button>
         </div>
 
-        <div>
-            <label>
-                Ingredients:
-                <input type="text" formControlName="ingredients">
-              </label>
-        </div>
 
         <div>
-            <label>
-                Category:
-                  <select formControlName="category" placeholder="Select a category" required>
-                    <option value="salad">Salad</option>
-                    <option value="hotMeal">Hot Meal</option>
-                    <option value="desert">Desert</option>
-                    <option value="sauce">Sauce</option>
-                  </select>
-              </label>
+            <mat-form-field>
+                <mat-select placeholder="Category">
+                    <mat-option *ngFor="let category of categories" [value]="category">
+                        {{category.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
 
         <div>
@@ -42,12 +54,12 @@
         </div>
 
         <div>
-            <input type="file">
+            <input type="file" formControlName="picture">
         </div>
-
-        <button type="submit">Reset</button>
-        <button type="submit" [disabled]="!recipeForm.valid">Submit</button>
-
+        <div class="buttons">
+            <button mat-raised-button (click)="resetForm()">Reset</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!recipeForm.valid" (click)="onSubmit()">Submit</button>
+        </div>
 
     </form>
 </div>
