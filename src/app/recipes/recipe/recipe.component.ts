@@ -1,9 +1,8 @@
 import { RecipesService } from './../../services/recipes.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Recipe } from '../recipes.model';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-recipe',
@@ -12,13 +11,13 @@ import { Observable } from 'rxjs';
 })
 export class RecipeComponent implements OnInit {
 
-  recipeObservable: Observable<any>;
   recipe: Recipe;
 
   constructor(
     private recipesService: RecipesService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -28,8 +27,7 @@ export class RecipeComponent implements OnInit {
   getRecipe(): void {
     const id: string = this.route.snapshot.paramMap.get('id');
     console.log(id);
-    this.recipeObservable = this.recipesService.getRecipe(id);
-    this.recipeObservable.subscribe(result => {
+    this.recipesService.getRecipe(id).subscribe(result => {
       this.recipe = result;
       console.log(result);
     });
@@ -37,6 +35,10 @@ export class RecipeComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  goToEditRecipe() {
+    this.router.navigateByUrl(`recipes/edit/${this.recipe._id}`);
   }
 
 }

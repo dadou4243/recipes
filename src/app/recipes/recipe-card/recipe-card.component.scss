@@ -1,0 +1,18 @@
+.recipe {
+    background-color: #ffffff;
+    border: 1px black;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    .image {
+        img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+    }
+    .content {
+        padding: 20px;
+    }
+}

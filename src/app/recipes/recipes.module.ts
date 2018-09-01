@@ -9,6 +9,7 @@ import { RecipesListComponent } from './recipes-list/recipes-list.component';
 import { RecipeComponent } from './recipe/recipe.component';
 import { RecipeCardComponent } from './recipe-card/recipe-card.component';
 import { RecipesComponent } from './recipes.component';
+import { EditRecipeComponent } from './edit-recipe/edit-recipe.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { RecipesComponent } from './recipes.component';
     RecipeComponent,
     RecipesListComponent,
     RecipesComponent,
-    AddRecipeComponent
+    AddRecipeComponent,
+    EditRecipeComponent
   ]
 })
 export class RecipesModule { }

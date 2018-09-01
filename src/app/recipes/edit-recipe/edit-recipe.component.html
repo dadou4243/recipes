@@ -1,5 +1,6 @@
-<div class="container">
-    <h1>Add a recipe</h1>
+<div class="container" *ngIf="recipe">
+
+    <h1>Edit recipe - {{recipe.name}}</h1>
     <form [formGroup]="recipeForm">
 
         <mat-form-field class="form-field">
@@ -12,8 +13,8 @@
 
         <div>
             <mat-form-field>
-                <mat-select placeholder="Category" formControlName="category">
-                    <mat-option *ngFor="let category of categories" [value]="category">
+                <mat-select placeholder="Category" formControlName="category" [(value)]="recipeForm.value.category">
+                    <mat-option *ngFor="let category of categories" [value]="category.value">
                         {{category.viewValue}}
                     </mat-option>
                 </mat-select>
@@ -70,8 +71,8 @@
             <input type="file" formControlName="picture">
         </div>
         <div class="buttons">
-            <button mat-raised-button (click)="resetForm()">Reset</button>
-            <button mat-raised-button color="primary" type="submit" [disabled]="!recipeForm.valid" (click)="onSubmit()">Submit</button>
+            <button mat-raised-button (click)="resetForm()">RESET</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!recipeForm.valid" (click)="onSave()">SAVE</button>
         </div>
 
     </form>

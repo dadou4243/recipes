@@ -36,4 +36,9 @@ export class RecipesService {
   getIngredients(): Observable<any[]> {
     return this.http.get<any[]>(this.API_URL + '/api/ingredients');
   }
+
+  editRecipe(recipe): Observable<any> {
+    console.log(recipe);
+    return this.http.patch<any>(this.API_URL + '/api/recipes/' + recipe._id, recipe);
+  }
 }

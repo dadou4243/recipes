@@ -69,6 +69,27 @@ router.post('/', (req, res, next) => {
         });
 });
 
+router.patch('/:id', (req, res, next) => {
+    console.log(req.body);
+    const id = req.body._id;
+    Recipe.update({ _id: id }, {
+            $set: {
+                name: req.body.name,
+                category: req.body.category,
+                ingredients: req.body.ingredients
+            }
+        })
+        .exec()
+        .then(result => {
+            res.status(200).json(result)
+
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+
 router.delete('/:id', (req, res, next) => {
     const id = req.params.id;
     console.log('delete ' + id);

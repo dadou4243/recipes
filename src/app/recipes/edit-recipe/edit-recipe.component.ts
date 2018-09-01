@@ -5,14 +5,18 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
-
+import { Recipe } from '../recipes.model';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-add-recipe',
-  templateUrl: './add-recipe.component.html',
-  styleUrls: ['./add-recipe.component.scss']
+  selector: 'app-edit-recipe',
+  templateUrl: './edit-recipe.component.html',
+  styleUrls: ['./edit-recipe.component.scss']
 })
-export class AddRecipeComponent implements OnInit {
+export class EditRecipeComponent implements OnInit {
+
+  recipe: Recipe;
 
   recipeForm: FormGroup;
 
@@ -35,7 +39,9 @@ export class AddRecipeComponent implements OnInit {
   constructor(
     private recipesService: RecipesService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private location: Location,
   ) {}
 
   ngOnInit() {
@@ -53,7 +59,22 @@ export class AddRecipeComponent implements OnInit {
 
     this.getIngredients();
     this.addStep();
+    this.getRecipe();
   }
+
+getRecipe(): void {
+  const id: string = this.route.snapshot.paramMap.get('id');
+    this.recipesService.getRecipe(id).subscribe(result => {
+      this.recipe = result;
+      console.log(result);
+      this.recipeForm.patchValue({
+        'name': this.recipe.name,
+        'duration': this.recipe.duration,
+        'category': this.recipe.category,
+        'ingredients': this.recipe.ingredients
+      });
+    });
+}
 
   get ingredientsForm() {
     return this.recipeForm.get('ingredients') as FormArray;
@@ -123,10 +144,11 @@ export class AddRecipeComponent implements OnInit {
     this.filteredIngredients.splice(i, 1);
   }
 
-  onSubmit() {
-    this.recipeForm.value.createdAt = new Date();
-    // console.log(this.recipeForm.value);
-    this.recipesService.addRecipe(this.recipeForm.value).subscribe(
+  onSave() {
+    console.log(this.recipeForm.value);
+    const req = this.recipeForm.value;
+    req['_id'] = this.recipe._id;
+    this.recipesService.editRecipe(req).subscribe(
       res => this.router.navigateByUrl('recipes'),
       error => console.log(error)
     );
@@ -134,7 +156,7 @@ export class AddRecipeComponent implements OnInit {
 
   resetForm() {
     // REPLACE BY DEFAULT VALUE
-    this.recipeForm.reset();
+    // this.recipeForm.reset();
   }
 
 }

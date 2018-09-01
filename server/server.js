@@ -9,6 +9,7 @@ const path = require('path');
 // Import routes
 const recipesRoutes = require('./routes/recipes');
 const categoriesRoutes = require('./routes/categories');
+const ingredientsRoutes = require('./routes/ingredients');
 
 // Middlewares
 app.use(morgan('dev'));
@@ -34,6 +35,7 @@ mongoose.connect('mongodb://localhost:27017/recipes', { useNewUrlParser: true })
 // Use routes
 app.use('/api/recipes', recipesRoutes);
 app.use('/api/categories', categoriesRoutes);
+app.use('/api/ingredients', ingredientsRoutes);
 
 // Static Angular Build
 app.use(express.static(path.join(__dirname, '../dist')))

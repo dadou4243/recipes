@@ -1,6 +1,7 @@
 <div class="container">
     <div *ngIf='recipe'>
         <button (click)="goBack()">Back</button>
+        <button (click)="goToEditRecipe()">Edit</button>
         <div class="recipe">
             <h2>{{recipe.name}}</h2>
             <div class="image ">
@@ -8,11 +9,11 @@
                 <img src="assets/images/default.png " *ngIf="!recipe.image ">
             </div>
             <div><span>Duration: </span>{{recipe.duration}}</div>
-            <div><span>Created on: </span>{{recipe.createdAt}}</div>
+            <div><span>Created on: </span>{{recipe.createdAt | date}}</div>
             <div *ngIf="recipe.ingredients">
                 <span>Ingredients:</span>
                 <ul *ngFor="let ingredient of recipe.ingredients">
-                    <li>{{ingredient}}</li>
+                    <li>{{ingredient.quantity}} {{ingredient.unit}} {{ingredient.name}}</li>
                 </ul>
             </div>
         </div>

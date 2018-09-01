@@ -1,3 +1,17 @@
-<p>
-  recipe-card works!
-</p>
+<div class="recipe" [routerLink]="['/recipes', recipe._id]">
+    <div class="image">
+        <img src="assets/images/{{recipe.image}} " *ngIf="recipe.image ">
+        <img src="assets/images/default.png " *ngIf="!recipe.image ">
+    </div>
+    <div class="content "><span>Name: </span>{{recipe.name}}
+        <div><span>Duration: </span>{{recipe.duration}}</div>
+        <div><span>Created on: </span>{{recipe.createdAt | date}}</div>
+        <div>
+            <span>Category: </span> {{recipe.category}}
+        </div>
+        <div>
+            <button mat-button (click)="deleteRecipe(recipe._id, $event)">DELETE</button>
+            <button mat-button (click)="editRecipe(recipe._id, $event)">EDIT</button>
+        </div>
+    </div>
+</div>
