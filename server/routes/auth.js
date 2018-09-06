@@ -1,16 +1,10 @@
 const router = require('express').Router();
-const Recipe = require('../models/Recipe');
+const User = require('../models/User');
 const mongoose = require('mongoose');
 
-//require multer for the file uploads
-var multer = require('multer');
-// set the directory for the uploads to the uploaded to
-var DIR = './uploads/';
-//define the type of upload multer would be doing and pass in its destination, in our case, its a single file with the name photo
-var upload = multer({ dest: DIR }).single('photo');
 
 router.get('/', (req, res, next) => {
-    Recipe
+    User
         .find()
         .sort('-createdAt')
         .exec()

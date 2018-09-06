@@ -1,19 +1,32 @@
 <div class="container">
     <div *ngIf='recipe'>
-        <button (click)="goBack()">Back</button>
-        <button (click)="goToEditRecipe()">Edit</button>
+        <button mat-raised-button (click)="goBack()">Back</button>
+        <button mat-raised-button (click)="goToEditRecipe()">Edit</button>
         <div class="recipe">
             <h2>{{recipe.name}}</h2>
+            <h3>{{recipe.category}}</h3>
             <div class="image ">
                 <img src="assets/images/{{recipe.image}} " *ngIf="recipe.image ">
                 <img src="assets/images/default.png " *ngIf="!recipe.image ">
             </div>
-            <div><span>Duration: </span>{{recipe.duration}}</div>
-            <div><span>Created on: </span>{{recipe.createdAt | date}}</div>
+            <div>
+                <span>Duration: </span>{{recipe.duration}} min
+            </div>
+            <div>
+                <span>Created on: </span>{{recipe.createdAt | date}}
+            </div>
             <div *ngIf="recipe.ingredients">
                 <span>Ingredients:</span>
                 <ul *ngFor="let ingredient of recipe.ingredients">
                     <li>{{ingredient.quantity}} {{ingredient.unit}} {{ingredient.name}}</li>
+                </ul>
+            </div>
+            <div *ngIf="recipe.steps">
+                <span>Steps:</span>
+                <ul *ngFor="let step of recipe.steps; let i=index">
+                    <li>
+                        <span>{{i+1}}. </span>{{step.description}} - {{step.duration}} min
+                    </li>
                 </ul>
             </div>
         </div>

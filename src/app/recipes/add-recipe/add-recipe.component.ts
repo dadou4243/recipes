@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
+import { IngredientUnits, Units } from '../../data/recipesForm.model';
 
 
 @Component({
@@ -22,11 +23,7 @@ export class AddRecipeComponent implements OnInit {
     {value: 'Desert', viewValue: 'Desert'}
   ];
 
-  units: any[] = [
-    {value: 'grams', viewValue: 'Grams'},
-    {value: 'liters', viewValue: 'Liters'},
-    {value: 'units', viewValue: 'Units'},
-  ];
+  units: IngredientUnits[] = Units;
 
   filteredIngredients: Observable<any>[] = [];
 
@@ -109,7 +106,7 @@ export class AddRecipeComponent implements OnInit {
           return ingredient ? this._filterIngredients(ingredient) : this.ingredientsList.slice();
         })
       ));
-      this.filteredIngredients[ingredientsLength].subscribe(result => console.log(result));
+      // this.filteredIngredients[ingredientsLength].subscribe(result => console.log(result));
   }
 
   private _filterIngredients(value): any[] {

@@ -2,7 +2,7 @@ import { RecipesService } from './../../services/recipes.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { Recipe } from '../recipes.model';
+import { Recipe } from '../../data/recipes.model';
 
 @Component({
   selector: 'app-recipe',
@@ -34,7 +34,7 @@ export class RecipeComponent implements OnInit {
   }
 
   goBack(): void {
-    this.location.back();
+    this.router.navigateByUrl('recipes/list');
   }
 
   goToEditRecipe() {

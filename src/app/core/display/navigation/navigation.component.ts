@@ -19,6 +19,14 @@ export class NavigationComponent implements OnInit {
     {
       name: 'Create a recipe',
       url: 'recipes/create'
+    },
+    {
+      name: 'Log In',
+      url: 'login'
+    },
+    {
+      name: 'Sign Up',
+      url: 'signup'
     }
   ];
 

@@ -10,10 +10,11 @@
         <mat-form-field class="form-field">
             <input type="text" matInput placeholder="Duration" formControlName="duration">
         </mat-form-field>
+        <span>min</span>
 
         <div>
             <mat-form-field>
-                <mat-select placeholder="Category" formControlName="category" [(value)]="recipeForm.value.category">
+                <mat-select placeholder="Category" formControlName="category" [(value)]="recipeForm.value.category.value">
                     <mat-option *ngFor="let category of categories" [value]="category.value">
                         {{category.viewValue}}
                     </mat-option>
@@ -37,13 +38,13 @@
                     <input type="text" placeholder="Quantity" matInput formControlName="quantity">
                 </mat-form-field>
                 <mat-form-field>
-                    <mat-select placeholder="Units">
-                        <mat-option *ngFor="let unit of units" [value]="unit">
+                    <mat-select placeholder="Units" formControlName="unit" [value]="ingredientsForm.value.unit">
+                        <mat-option *ngFor="let unit of units" [value]="unit.value">
                             {{unit.viewValue}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <button mat-stroked-button color="warn" *ngIf="i>0" (click)="deleteIngredient(i)">Delete</button>
+                <button mat-stroked-button color="warn" *ngIf="ingredientsForm.controls.length>1" (click)="deleteIngredient(i)">Delete</button>
             </div>
             <button mat-stroked-button color="primary" (click)="addIngredient()">Add Ingredient</button>
         </div>
@@ -71,8 +72,8 @@
             <input type="file" formControlName="picture">
         </div>
         <div class="buttons">
-            <button mat-raised-button (click)="resetForm()">RESET</button>
-            <button mat-raised-button color="primary" type="submit" [disabled]="!recipeForm.valid" (click)="onSave()">SAVE</button>
+            <button mat-raised-button (click)="resetForm()">RESET CHANGES</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!recipeForm.valid" (click)="onSave()">SAVE RECIPE</button>
         </div>
 
     </form>

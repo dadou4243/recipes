@@ -10,4 +10,5 @@ export interface Recipe {
     createdAt: any;
     ingredients: any[];
     author?: string;
+    steps: any[];
 }

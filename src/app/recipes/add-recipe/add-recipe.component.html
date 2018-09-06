@@ -36,8 +36,8 @@
                     <input type="text" placeholder="Quantity" matInput formControlName="quantity">
                 </mat-form-field>
                 <mat-form-field>
-                    <mat-select placeholder="Units">
-                        <mat-option *ngFor="let unit of units" [value]="unit">
+                    <mat-select placeholder="Units" formControlName="unit" [value]="ingredientsForm.value.unit">
+                        <mat-option *ngFor="let unit of units" [value]="unit.value">
                             {{unit.viewValue}}
                         </mat-option>
                     </mat-select>
@@ -70,8 +70,8 @@
             <input type="file" formControlName="picture">
         </div>
         <div class="buttons">
-            <button mat-raised-button (click)="resetForm()">Reset</button>
-            <button mat-raised-button color="primary" type="submit" [disabled]="!recipeForm.valid" (click)="onSubmit()">Submit</button>
+            <button mat-raised-button (click)="resetForm()">RESET FORM</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!recipeForm.valid" (click)="onSubmit()">CREATE RECIPE</button>
         </div>
 
     </form>

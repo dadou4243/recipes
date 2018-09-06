@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const bodyParser = require("body-parser");
 const http = require('http');
 const path = require('path');
+var passport = require('passport');
 
 // Import routes
 const recipesRoutes = require('./routes/recipes');
@@ -31,6 +32,9 @@ app.use(function(req, res, next) {
 // Connect to mongoose
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/recipes', { useNewUrlParser: true });
+
+// Initialize passport
+app.use(passport.initialize());
 
 // Use routes
 app.use('/api/recipes', recipesRoutes);
