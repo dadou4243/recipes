@@ -5,12 +5,16 @@ const morgan = require('morgan');
 const bodyParser = require("body-parser");
 const http = require('http');
 const path = require('path');
-var passport = require('passport');
+const passport = require('passport');
+
+const dbConfig = require('./config/db');
 
 // Import routes
 const recipesRoutes = require('./routes/recipes');
 const categoriesRoutes = require('./routes/categories');
 const ingredientsRoutes = require('./routes/ingredients');
+const usersRoutes = require('./routes/users');
+const authRoutes = require('./routes/auth');
 
 // Middlewares
 app.use(morgan('dev'));
@@ -31,7 +35,10 @@ app.use(function(req, res, next) {
 
 // Connect to mongoose
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/recipes', { useNewUrlParser: true });
+mongoose.connect(dbConfig.local, { useNewUrlParser: true });
+
+require('./models/User');
+require('./config/passport');
 
 // Initialize passport
 app.use(passport.initialize());
@@ -40,15 +47,15 @@ app.use(passport.initialize());
 app.use('/api/recipes', recipesRoutes);
 app.use('/api/categories', categoriesRoutes);
 app.use('/api/ingredients', ingredientsRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/users', usersRoutes);
 
 // Static Angular Build
 app.use(express.static(path.join(__dirname, '../dist')))
 
 // Serve the index.html Angular file
 app.get('*', (req, res) => {
-
     res.sendFile(path.join(__dirname, '../dist/index.html'));
-
 })
 
 // Handling Errors
