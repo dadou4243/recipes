@@ -1,6 +1,9 @@
 <div class="container">
     <h1>Log In</h1>
     <form [formGroup]="logInForm">
+        <div>
+            {{serverError}}
+        </div>
 
         <div>
             <mat-form-field class="form-field">
@@ -16,6 +19,10 @@
 
         <div>
             <mat-checkbox formControlName="rememberMe">Remember me</mat-checkbox>
+        </div>
+
+        <div>
+            <a [routerLink]="['/signup']" routerLinkActive="router-link-active">Create an account</a>
         </div>
 
         <div class="buttons">

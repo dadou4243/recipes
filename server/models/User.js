@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
-var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 
 var userSchema = new Schema({
@@ -13,18 +12,37 @@ var userSchema = new Schema({
     username: {
         type: String,
     },
-    hash: String,
-    salt: String
+    password: String
 });
 
-userSchema.methods.setPassword = function(password) {
-    this.salt = crypto.randomBytes(16).toString('hex');
-    this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 512, 'sha512').toString('hex');
-};
+userSchema.pre('save', function(next) {
+    const user = this;
+    if (user.isModified('password') || user.isNew) {
+        // console.log(user);
+        bcrypt.genSalt(10, (err, salt) => {
+            if (err) {
+                return next(err);
+            }
+            // console.log(user.password);
+            bcrypt.hash(user.password, salt, null, function(err, hash) {
+                if (err) {
+                    return next(err);
+                }
+                user.password = hash;
+                next();
+            });
+        });
+    } else {
+        return next();
+    }
+});
 
-userSchema.methods.validPassword = function(password) {
-    var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 512, 'sha512').toString('hex');
-    return this.hash === hash;
+userSchema.methods.validPassword = function(password, cb) {
+    bcrypt.compare(password, this.password, function(err, res) {
+        if (err) console.log('error: ', err);
+        // console.log('bcrypt compare res: ', res);
+        cb(null, res);
+    });
 };
 
 userSchema.methods.generateJWT = function() {
@@ -47,4 +65,6 @@ userSchema.methods.toAuthJSON = function() {
     };
 };
 
-module.exports = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;

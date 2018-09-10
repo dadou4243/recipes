@@ -48,7 +48,7 @@ app.use('/api/recipes', recipesRoutes);
 app.use('/api/categories', categoriesRoutes);
 app.use('/api/ingredients', ingredientsRoutes);
 app.use('/api/auth', authRoutes);
-app.use('/api/users', usersRoutes);
+app.use('/api/users', passport.authenticate('jwt', { session: false }), usersRoutes);
 
 // Static Angular Build
 app.use(express.static(path.join(__dirname, '../dist')))
@@ -82,5 +82,7 @@ app.set('port', port);
 const server = http.createServer(app);
 
 server.listen(port, (req, res) => {
+    console.log(process.env.PORT);
+
     console.log(`RUNNING on port ${port}`);
 });

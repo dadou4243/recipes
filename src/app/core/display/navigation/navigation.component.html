@@ -6,13 +6,13 @@
         <input type="text" placeholder="Search a recipe...">
     </div>
     <ul>
-        <li *ngFor="let link of links">
+        <li *ngFor="let link of links" [hidden]="(link.name == 'Log In' || link.name =='Sign Up') && loggedIn">
             <a routerLink="{{link.url}}" routerLinkActive="link-active">{{link.name}}</a>
         </li>
     </ul>
     <div class="space"></div>
     <div class="profile-icons">
-        <a [routerLink]="['/account']">
+        <a [routerLink]="['/profile']">
             <img src="assets/images/cutmypic.png" alt="">
         </a>
     </div>

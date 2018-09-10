@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navigation',
@@ -30,9 +31,17 @@ export class NavigationComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  loggedIn: Boolean = false;
+
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
+    this.authService.loggedIn.subscribe(value => {
+      console.log(value);
+      this.loggedIn = value;
+    });
   }
 
 }

@@ -1,2 +1,2 @@
-import * as Recipes from './recipes.model';
-import * as RecipesForm from './recipesForm.model';
+export * from './recipes.model';
+export * from './recipesForm.model';

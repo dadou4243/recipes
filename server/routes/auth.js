@@ -1,27 +1,85 @@
 const router = require('express').Router();
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
 
-// GET current route (required, only authenticated users have access)
-router.get('/current', auth.required, (req, res, next) => {
-    const { payload: { id } } = req;
+//POST new user route - SIGN UP
+router.post('/', (req, res, next) => {
+    // console.log(req.body);
 
-    return Users.findById(id)
-        .then((user) => {
-            if (!user) {
-                return res.sendStatus(400);
-            }
+    // Check if email is empty
+    if (!req.body.email) {
+        return res.status(422).json({
+            errors: {
+                email: 'is required',
+            },
+        });
+    }
 
-            return res.json({ user: user.toAuthJSON() });
+    // Check if password is empty
+    if (!req.body.password) {
+        return res.status(422).json({
+            errors: {
+                password: 'is required',
+            },
+        });
+    }
+
+    // Create a user
+    const newUser = new User({
+        email: req.body.email,
+        password: req.body.password
+    });
+
+    // console.log('newUser: ', newUser);
+
+    return newUser.save()
+        .then(() => {
+            res.json(newUser.toAuthJSON())
         });
 });
 
-// GET users listing. //
-router.get('/', function(req, res, next) {
-    res.send('respond with a resource');
-});
+// POST login route
+router.post('/login', (req, res, next) => {
+    console.log(req.body);
 
-// GET user profile. //
-router.get('/profile', function(req, res, next) {
-    res.send(req.user);
+    // Check if email is empty
+    if (!req.body.email) {
+        return res.status(422).json({
+            success: false,
+            msg: 'Email is required',
+        });
+    }
+    // Check if password is empty
+    if (!req.body.password) {
+        return res.status(422).json({
+            success: false,
+            msg: 'Password is required',
+        });
+    }
+
+    User.findOne({
+        email: req.body.email
+    }, function(err, user) {
+        if (err) throw err;
+
+        if (!user) {
+            // console.log('User not found.');
+            res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
+        } else {
+            // console.log(user);
+            // check if password matches
+            user.validPassword(req.body.password, function(err, isMatch) {
+                if (isMatch && !err) {
+                    // if user is found and password is right create a token
+                    user.token = user.generateJWT();
+                    // return the information including token as JSON
+                    return res.json(user.toAuthJSON());
+                } else {
+                    res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.' });
+                }
+            });
+        }
+    });
 });
 
 module.exports = router;

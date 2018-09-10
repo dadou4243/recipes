@@ -9,6 +9,7 @@ var DIR = './uploads/';
 //define the type of upload multer would be doing and pass in its destination, in our case, its a single file with the name photo
 var upload = multer({ dest: DIR }).single('photo');
 
+// GET all recipes
 router.get('/', (req, res, next) => {
     Recipe
         .find()
@@ -24,7 +25,6 @@ router.get('/', (req, res, next) => {
                 error: err
             })
         });
-
 });
 
 router.get('/:recipeId', (req, res, next) => {
