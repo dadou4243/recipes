@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const recipeSchema = new mongoose.Schema({
-    id: mongoose.Schema.Types.ObjectId,
     name: String,
     description: String,
     image: {

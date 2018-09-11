@@ -6,7 +6,7 @@ import { UsersService } from './services/users.service';
 import { RecipesService } from './services/recipes.service';
 
 import { HomeComponent } from './home/home.component';
-import { NavigationComponent } from './layout/header/navigation.component';
+import { HeaderComponent } from './layout/header/header.component';
 import { SearchComponent } from './layout/search/search.component';
 
 import { SharedModule } from '../shared/shared.module';
@@ -18,12 +18,12 @@ import { SharedModule } from '../shared/shared.module';
   ],
   declarations: [
     HomeComponent,
-    NavigationComponent,
+    HeaderComponent,
     SearchComponent,
   ],
   exports: [
     HomeComponent,
-    NavigationComponent,
+    HeaderComponent,
   ],
   providers: [
     RecipesService,

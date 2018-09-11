@@ -1,0 +1,12 @@
+.container {
+    max-width: 800px;
+    padding: 20px;
+    margin: 0 auto;
+    app-recipe-card {
+        text-decoration: none;
+        color: inherit;
+        float: left;
+        width: calc(33.33% - 20px);
+        margin: 10px;
+    }
+}

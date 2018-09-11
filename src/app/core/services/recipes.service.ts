@@ -5,12 +5,16 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Recipe } from '../../data/recipes.model';
+import { UsersService } from './users.service';
 
 @Injectable()
 
 export class RecipesService {
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private usersService: UsersService
+  ) {}
 
   getRecipes(): Observable<Recipe[]> {
     return this.http.get<Recipe[]>(`${environment.API_URL}/recipes`);
@@ -21,6 +25,7 @@ export class RecipesService {
   }
 
   addRecipe(recipe): Observable<Recipe>  {
+    this.usersService.currentUser.subscribe(currentUser => recipe.author = currentUser._id);
     return this.http.post<Recipe>(`${environment.API_URL}/recipes`, recipe);
   }
 
@@ -40,5 +45,9 @@ export class RecipesService {
   searchRecipe(searchInput) {
     console.log(searchInput);
     return this.http.post<any>(`${environment.API_URL}/recipes/search`, {searchInput});
+  }
+
+  getMyRecipes(authorId) {
+    return this.http.get<any[]>(`${environment.API_URL}/recipes/user/${authorId}`);
   }
 }

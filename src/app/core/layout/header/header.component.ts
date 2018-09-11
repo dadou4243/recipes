@@ -1,24 +1,24 @@
-import { RecipesService } from './../../services/recipes.service';
+import { RecipesService } from '../../services/recipes.service';
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
-import { JwtService } from './../../services/jwt.service';
+import { JwtService } from '../../services/jwt.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-navigation',
-  templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
-export class NavigationComponent implements OnInit {
+export class HeaderComponent implements OnInit {
 
   links = [
     {
-      name: 'My Recipes',
+      name: 'All Recipes',
       url: 'recipes/list'
     },
     {
-      name: 'Explore',
-      url: 'explore'
+      name: 'My Recipes',
+      url: 'recipes/my-recipes'
     },
     {
       name: 'Create a recipe',

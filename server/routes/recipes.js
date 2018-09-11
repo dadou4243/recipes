@@ -61,7 +61,7 @@ router.post('/', (req, res, next) => {
         // quantity: req.body.quantity,
         createdAt: req.body.createdAt,
         ingredients: req.body.ingredients,
-        // author: req.body.author
+        author: req.body.author
     })
     recipe
         .save()
@@ -130,7 +130,26 @@ router.post('/search', (req, res, next) => {
             // console.log(recipes);
             res.status(200).json(recipes);
         });
-
 })
+
+// GET all recipes
+router.get('/user/:authorId', (req, res, next) => {
+    const id = req.params.authorId;
+    console.log(id);
+    Recipe
+        .find({ author: id })
+        .sort('-createdAt')
+        .exec()
+        .then(recipes => {
+            // console.log(recipes);
+            res.status(200).json(recipes);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            })
+        });
+});
 
 module.exports = router;
