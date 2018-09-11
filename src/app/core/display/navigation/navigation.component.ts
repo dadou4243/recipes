@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import { UsersService } from '../../services/users.service';
 import { JwtService } from './../../services/jwt.service';
 import { Router } from '@angular/router';
@@ -39,15 +38,13 @@ export class NavigationComponent implements OnInit {
   currentUser: any = {};
 
   constructor(
-    private authService: AuthService,
     private usersService: UsersService,
     private jwtService: JwtService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.authService.loggedIn.subscribe(value => {
-      console.log(value);
+    this.usersService.loggedIn.subscribe(value => {
       this.loggedIn = value;
     });
 
@@ -60,7 +57,7 @@ export class NavigationComponent implements OnInit {
   logOut() {
     console.log('logOut');
     this.jwtService.destroyToken();
-    this.authService.setLoggedInValue(false);
+    this.usersService.setLoggedInValue(false);
     this.router.navigateByUrl('');
   }
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../core/services/auth.service';
 import { JwtService } from './../../core/services/jwt.service';
+import { UsersService } from '../../core/services/users.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -15,9 +15,9 @@ export class SignUpComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
     private router: Router,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private usersService: UsersService
   ) { }
 
   ngOnInit() {
@@ -29,12 +29,13 @@ export class SignUpComponent implements OnInit {
   }
 
   signUp() {
-    this.authService.signUp(this.signUpForm).subscribe(
+    this.usersService.signUp(this.signUpForm).subscribe(
       res => {
         console.log(res);
-        this.authService.logIn(res);
-        this.authService.setLoggedInValue(true);
+        this.usersService.logIn(res);
+        this.usersService.setLoggedInValue(true);
         this.jwtService.saveToken(res.token);
+        this.usersService.getCurrentUser();
         this.router.navigateByUrl('profile');
       },
       err => console.log(err)

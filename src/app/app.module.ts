@@ -14,7 +14,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { RecipesModule } from './recipes/recipes.module';
 
-import { AuthInterceptor } from './core/services/auth.interceptor';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 
 @NgModule({
@@ -25,13 +25,10 @@ import { AuthInterceptor } from './core/services/auth.interceptor';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
-    MyAccountModule,
     CoreModule,
     SharedModule,
-    RecipesModule,
     AppRoutingModule,
-    AuthenticationModule
+    BrowserAnimationsModule
   ],
   providers: [
     {

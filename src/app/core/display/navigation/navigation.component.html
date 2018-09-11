@@ -10,7 +10,7 @@
             <a routerLink="{{link.url}}" routerLinkActive="link-active">{{link.name}}</a>
         </li>
         <li *ngIf="loggedIn">
-            <button (click)="logOut()">Log Out</button>
+            <a (click)="logOut()">Log Out</a>
         </li>
     </ul>
     <div class="space"></div>

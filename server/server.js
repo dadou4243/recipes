@@ -56,6 +56,7 @@ app.use((req, res, next) => {
     next(error);
 });
 
+// Handling Errors
 app.use((error, req, res, next) => {
     res.status(error.status || 500);
     res.json({
@@ -73,7 +74,5 @@ app.set('port', port);
 const server = http.createServer(app);
 
 server.listen(port, (req, res) => {
-    console.log(process.env.PORT);
-
     console.log(`RUNNING on port ${port}`);
 });

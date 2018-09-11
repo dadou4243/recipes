@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { MyAccountComponent } from './my-account.component';
+import { AuthGuard } from '../core/guards/auth.guard';
 
 
 const routes: Routes = [
   {
-    path: 'profile',
+    path: '',
     component: MyAccountComponent,
+    canActivate: [AuthGuard]
     // children: [
     //   {path: '', redirectTo: '', pathMatch: 'full'},
     // ]

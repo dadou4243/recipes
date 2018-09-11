@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { JwtService, AuthService } from './../../core/services';
+import { JwtService } from './../../core/services';
+import { UsersService } from '../../core/services/users.service';
 
 @Component({
   selector: 'app-log-in',
@@ -16,9 +17,9 @@ export class LogInComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
     private router: Router,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private usersService: UsersService
   ) { }
 
   ngOnInit() {
@@ -30,10 +31,11 @@ export class LogInComponent implements OnInit {
   }
 
   login() {
-    this.authService.logIn(this.logInForm.value).subscribe(
+    this.usersService.logIn(this.logInForm.value).subscribe(
       res => {
         this.jwtService.saveToken(res.token);
-        this.authService.setLoggedInValue(true);
+        this.usersService.setLoggedInValue(true);
+        this.usersService.getCurrentUser();
         this.router.navigateByUrl('profile');
       },
       err => {
