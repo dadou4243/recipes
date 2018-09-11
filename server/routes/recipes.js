@@ -115,4 +115,22 @@ router.delete('/:id', (req, res, next) => {
         });
 });
 
+router.post('/search', (req, res, next) => {
+    console.log(req.body);
+    const searchQuery = req.body.searchInput;
+    console.log(searchQuery);
+    Recipe
+        .find({ $text: { $search: searchQuery } }, { score: { $meta: "textScore" } })
+        .exec(function(err, recipes) {
+            if (err) {
+                res.status(500).json({
+                    error: err
+                })
+            }
+            // console.log(recipes);
+            res.status(200).json(recipes);
+        });
+
+})
+
 module.exports = router;

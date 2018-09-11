@@ -10,6 +10,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatProgressSpinnerModule} from '@angular/material';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatAutocompleteModule,
     MatButtonModule,
     MatCardModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     CommonModule,
@@ -39,7 +41,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatAutocompleteModule,
     MatButtonModule,
     MatCardModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatProgressSpinnerModule
   ],
   declarations: []
 })

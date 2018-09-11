@@ -1,3 +1,4 @@
+import { SearchResultsComponent } from './search-results/search-results.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -7,6 +8,7 @@ import { SignUpComponent } from './authentication/sign-up/sign-up.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent},
+  { path: 'search', component: SearchResultsComponent},
   { path: 'login', component: LogInComponent},
   { path: 'signup', component: SignUpComponent},
   { path: 'recipes', loadChildren: './recipes/recipes.module#RecipesModule' },

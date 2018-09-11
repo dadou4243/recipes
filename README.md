@@ -1,3 +1,3 @@
 # Recipes App
 
-Recipes App using Angular and the MEAN Stack.
+Recipes App using the MEAN Stack.
