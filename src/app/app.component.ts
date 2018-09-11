@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JwtService } from './core/services/jwt.service';
+import { UsersService } from './core/services/users.service';
+import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +10,18 @@ import { JwtService } from './core/services/jwt.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor (private jwtService: JwtService) {}
+  constructor (
+    private jwtService: JwtService,
+    private usersService: UsersService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
-    this.jwtService.getToken();
+    if (this.jwtService.getToken() && !this.jwtService.checkIfTokenExpired()) {
+      this.authService.setLoggedInValue(true);
+      this.usersService.getCurrentUser();
+    }
   }
+
 }
+

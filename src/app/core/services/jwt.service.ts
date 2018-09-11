@@ -17,21 +17,25 @@ export class JwtService {
   }
 
   getToken() {
-    return window.localStorage.getItem('RecipesToken');
+    return window.localStorage.getItem('Recipes_Token_Id');
   }
 
-  checkIfTokenExpired(token) {
+  checkIfTokenExpired() {
     const now = new Date().getTime() / 1000;
-    console.log(now > token.exp);
-    return now > token.exp;
+    const exp = parseInt(window.localStorage.getItem('Recipes_Token_Exp'), 10);
+    return now > exp;
   }
 
   saveToken(token: string) {
-    window.localStorage.setItem('RecipesToken', token);
+    const decodedToken = this.getDecodedToken(token);
+    console.log(decodedToken);
+    window.localStorage.setItem('Recipes_Token_Id', token);
+    window.localStorage.setItem('Recipes_Token_Exp', decodedToken.exp);
   }
 
   destroyToken() {
-    window.localStorage.removeItem('jwtToken');
+    window.localStorage.removeItem('Recipes_Token_Id');
+    window.localStorage.removeItem('Recipes_Token_Exp');
   }
 
 }

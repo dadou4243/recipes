@@ -6,8 +6,11 @@ import { MyAccountComponent } from './my-account.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: MyAccountComponent
+    path: 'profile',
+    component: MyAccountComponent,
+    // children: [
+    //   {path: '', redirectTo: '', pathMatch: 'full'},
+    // ]
   }
 ];
 

@@ -26,7 +26,7 @@ export class RecipesService {
   }
 
   deleteRecipe(id) {
-    return this.http.delete(this.API_URL + '/api/recipes/' + id);
+    return this.http.delete<any>(this.API_URL + '/api/recipes/' + id);
   }
 
   getIngredients(): Observable<any[]> {
