@@ -48,18 +48,19 @@ router.get('/:recipeId', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
     console.log('add recipe');
-    console.log(req.body);
+    console.log(`Add recipe: ${req.body}`);
     const recipe = new Recipe({
         _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
         category: req.body.category.value,
         duration: req.body.duration,
         steps: req.body.steps,
-        // level: req.body.level,
+        level: req.body.level,
         // cost: req.body.cost,
         // image: req.body.image,
         // quantity: req.body.quantity,
-        createdAt: req.body.createdAt,
+        createdAt: new Date(),
+        lastEditedAt: new Date(),
         ingredients: req.body.ingredients,
         author: req.body.author
     })
@@ -85,7 +86,8 @@ router.patch('/:id', (req, res, next) => {
                 name: req.body.name,
                 category: req.body.category.value,
                 ingredients: req.body.ingredients,
-                steps: req.body.steps
+                steps: req.body.steps,
+                lastEditedAt: new Date()
             }
         })
         .exec()

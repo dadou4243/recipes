@@ -1,0 +1,21 @@
+<div class="container" *ngIf="userForm">
+    <h2>Edit my Details</h2>
+    <form [formGroup]="userForm">
+        <mat-form-field class="form-field">
+            <input type="text" matInput placeholder="First name" formControlName="firstName">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <input type="text" matInput placeholder="Last name" formControlName="lastName">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <input type="text" matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+
+        <div class="buttons">
+            <button mat-raised-button (click)="resetChanges()">RESET CHANGES</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid" (click)="onSave()">SAVE DETAILS</button>
+        </div>
+    </form>
+</div>

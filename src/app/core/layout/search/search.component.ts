@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RecipesService } from '../../services';
-import { URLSearchParams } from '@angular/http';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 
 @Component({

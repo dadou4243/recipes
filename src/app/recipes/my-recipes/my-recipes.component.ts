@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RecipesService, UsersService } from '../../core/services';
 import { Recipe } from '../../data/recipes.model';
+import { RecipesService } from '../../core/services/recipes.service';
+import { JwtService } from '../../core/services/jwt.service';
 
 @Component({
   selector: 'app-my-recipes',
@@ -9,22 +10,18 @@ import { Recipe } from '../../data/recipes.model';
 })
 export class MyRecipesComponent implements OnInit {
 
-  recipes: Recipe[];
+  recipes: Recipe[] = [];
   currentUser: any;
 
   constructor(
     private recipesService: RecipesService,
-    private usersService: UsersService
+    private jwtService: JwtService
   ) { }
 
   ngOnInit() {
-    this.usersService.currentUser.subscribe(user => {
-      this.currentUser = user;
-      console.log(this.currentUser);
-      if (user) {
-        this.getRecipes(this.currentUser._id);
-      }
-    });
+    if (this.jwtService.getToken) {
+      this.getRecipes(this.jwtService.currentUser._id);
+    }
   }
 
   getRecipes(authorId): void {

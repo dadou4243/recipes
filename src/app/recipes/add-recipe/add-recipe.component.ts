@@ -121,7 +121,6 @@ export class AddRecipeComponent implements OnInit {
   }
 
   onSubmit() {
-    this.recipeForm.value.createdAt = new Date();
     // console.log(this.recipeForm.value);
     this.recipesService.addRecipe(this.recipeForm.value).subscribe(
       res => this.router.navigateByUrl('recipes'),

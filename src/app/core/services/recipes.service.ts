@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 
 import { Recipe } from '../../data/recipes.model';
 import { UsersService } from './users.service';
+import { JwtService } from './jwt.service';
 
 @Injectable()
 
@@ -13,7 +14,8 @@ export class RecipesService {
 
   constructor(
     private http: HttpClient,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private jwtService: JwtService
   ) {}
 
   getRecipes(): Observable<Recipe[]> {
@@ -25,7 +27,7 @@ export class RecipesService {
   }
 
   addRecipe(recipe): Observable<Recipe>  {
-    this.usersService.currentUser.subscribe(currentUser => recipe.author = currentUser._id);
+    recipe.author = this.jwtService.currentUser._id;
     return this.http.post<Recipe>(`${environment.API_URL}/recipes`, recipe);
   }
 

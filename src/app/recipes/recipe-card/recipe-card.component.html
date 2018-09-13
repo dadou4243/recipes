@@ -9,7 +9,7 @@
         <div>
             <span>Category: </span> {{recipe.category}}
         </div>
-        <div>
+        <div *ngIf="recipe.author && recipe.author === jwtService.currentUser._id">
             <button mat-button (click)="deleteRecipe(recipe._id, $event)">DELETE</button>
             <button mat-button (click)="editRecipe(recipe._id, $event)">EDIT</button>
         </div>

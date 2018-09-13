@@ -6,28 +6,12 @@ const User = mongoose.model('User');
 router.post('/', (req, res, next) => {
     // console.log(req.body);
 
-    // Check if email is empty
-    if (!req.body.email) {
-        return res.status(422).json({
-            errors: {
-                email: 'is required',
-            },
-        });
-    }
-
-    // Check if password is empty
-    if (!req.body.password) {
-        return res.status(422).json({
-            errors: {
-                password: 'is required',
-            },
-        });
-    }
-
     // Create a user
     const newUser = new User({
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName
     });
 
     // console.log('newUser: ', newUser);

@@ -1,5 +1,11 @@
 <div class="container">
     <h2>My Recipes</h2>
+    <div *ngIf="recipes.length === 0">
+        <p>
+            You have not created a recipe yet.
+            <a [routerLink]="['/recipes','create']">Create your first recipe!</a>
+        </p>
+    </div>
     <app-recipe-card *ngFor="let recipe of recipes" [recipe]="recipe" (deleted)="deleteRecipe($event)">
     </app-recipe-card>
     <router-outlet></router-outlet>

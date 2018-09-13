@@ -1,6 +1,6 @@
 import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { RecipesService } from '../core/services';
+import { RecipesService } from '../core/services/recipes.service';
 
 @Component({
   selector: 'app-search',

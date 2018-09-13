@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'signup', component: SignUpComponent},
   { path: 'recipes', loadChildren: './recipes/recipes.module#RecipesModule' },
   { path: 'profile', loadChildren: './my-account/my-account.module#MyAccountModule'},
+  { path: 'admin', loadChildren: './admin/admin.module#AdminModule'},
   { path: '**', redirectTo: '' }
 ];
 

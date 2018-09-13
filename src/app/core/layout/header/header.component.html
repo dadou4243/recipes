@@ -10,10 +10,13 @@
         <li *ngIf="loggedIn">
             <a (click)="logOut()">Log Out</a>
         </li>
+        <li *ngIf="currentUser?.role === 'admin'">
+            <a [routerLink]="['admin']">Admin</a>
+        </li>
     </ul>
     <div class="space"></div>
     <div class="profile-icons">
-        <span *ngIf="loggedIn">{{currentUser?.email}}</span>
+        <span class="email" *ngIf="loggedIn">{{currentUser?.email}}</span>
         <a [routerLink]="['/profile']">
             <img src="assets/images/cutmypic.png" alt="">
         </a>

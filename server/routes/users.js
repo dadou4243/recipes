@@ -1,16 +1,6 @@
 const router = require('express').Router();
 const User = require('../models/User');
 
-// Get Token From the Headers of the HTTP Request
-const getTokenFromHeaders = (req) => {
-    const { headers: { authorization } } = req;
-
-    if (authorization && authorization.split(' ')[0] === 'Token') {
-        return authorization.split(' ')[1];
-    }
-    return null;
-};
-
 // GET users listing.
 router.get('/', function(req, res, next) {
     User
@@ -27,9 +17,35 @@ router.get('/', function(req, res, next) {
         });
 });
 
-// GET user profile.
+// GET Current user details
 router.get('/current', function(req, res, next) {
     res.send(req.user);
+});
+
+// GET Current User details
+router.get('/:id', function(req, res, next) {
+    res.send(req.user);
+});
+
+// PATCH User details
+router.patch('/:id', (req, res, next) => {
+    console.log(req.body);
+    const id = req.body._id;
+    User.update({ _id: id }, {
+            $set: {
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+            }
+        })
+        .exec()
+        .then(result => {
+            res.status(200).json(result)
+
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
 });
 
 module.exports = router;

@@ -1,0 +1,40 @@
+.container {
+    margin: 30px 40px;
+    padding: 10px 40px;
+    background: white;
+    .form-group {
+        margin: 50px 0;
+    }
+    .ingredients {
+        mat-form-field.quantity-field {
+            width: 60px;
+            text-align: right;
+        }
+        mat-form-field {
+            margin-right: 20px;
+        }
+    }
+    .steps {
+        .step-number {
+            // font-size: 25px;
+            // margin-right: 20px;
+        }
+        mat-form-field.step-description {
+            min-width: 400px;
+            max-width: 600px;
+        }
+        mat-form-field {
+            margin-right: 20px;
+        }
+    }
+    .form-field {
+        display: block;
+        width: 200px;
+    }
+    .buttons {
+        margin: 20px 0;
+        button {
+            margin-right: 20px;
+        }
+    }
+}

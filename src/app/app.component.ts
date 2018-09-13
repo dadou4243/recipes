@@ -17,7 +17,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     if (this.jwtService.getToken() && !this.jwtService.checkIfTokenExpired()) {
       this.usersService.setLoggedInValue(true);
-      this.usersService.getCurrentUser();
     }
   }
 

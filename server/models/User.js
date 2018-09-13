@@ -12,7 +12,10 @@ var userSchema = new Schema({
     username: {
         type: String,
     },
-    password: String
+    firstName: String,
+    lastName: String,
+    password: String,
+    role: String
 });
 
 userSchema.pre('save', function(next) {
@@ -52,7 +55,9 @@ userSchema.methods.generateJWT = function() {
     return jwt.sign({
             _id: this._id,
             email: this.email,
-            name: this.name,
+            firstName: this.firstName,
+            lastName: this.lastName,
+            role: this.role,
             exp: parseInt(expiry.getTime() / 1000),
         },
         "MY_SECRET"); // DO NOT KEEP YOUR SECRET IN THE CODE!

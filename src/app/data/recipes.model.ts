@@ -3,7 +3,7 @@ export interface Recipe {
     name: string;
     duration: number;
     category?: string;
-    level?: string;
+    difficulty?: string;
     cost?: string;
     image?: string;
     quantity?: number;

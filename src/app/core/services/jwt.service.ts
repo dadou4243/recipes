@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 
 import * as jwt_decode from 'jwt-decode';
+import { DecodedToken } from '../../data/decodedToken.model';
 
 
 @Injectable()
 export class JwtService {
 
-  constructor() { }
+  constructor() {
+    console.log(this.decodeToken(this.getToken()));
+  }
 
-  getDecodedToken(token: string): any {
+  decodeToken(token: string): any {
     try {
         return jwt_decode(token);
     } catch (Error) {
@@ -16,7 +19,7 @@ export class JwtService {
     }
   }
 
-  getToken() {
+  getToken(): string {
     return window.localStorage.getItem('Recipes_Token_Id');
   }
 
@@ -27,8 +30,8 @@ export class JwtService {
   }
 
   saveToken(token: string) {
-    const decodedToken = this.getDecodedToken(token);
-    console.log(decodedToken);
+    const decodedToken = this.decodeToken(token);
+    // console.log(decodedToken);
     window.localStorage.setItem('Recipes_Token_Id', token);
     window.localStorage.setItem('Recipes_Token_Exp', decodedToken.exp);
   }
@@ -38,4 +41,8 @@ export class JwtService {
     window.localStorage.removeItem('Recipes_Token_Exp');
   }
 
+  get currentUser(): DecodedToken {
+    // console.log(this.decodeToken(this.getToken()));
+    return this.decodeToken(this.getToken());
+  }
 }

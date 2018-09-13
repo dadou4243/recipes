@@ -8,7 +8,9 @@ const recipeSchema = new mongoose.Schema({
         default: ''
     },
     createdAt: Date,
+    lastEditedAt: Date,
     category: String,
+    difficulty: String,
     ingredients: [{
         name: String,
         quantity: Number,

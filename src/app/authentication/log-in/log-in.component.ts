@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, Validators, FormBuilder, FormControl, FormGroup, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { JwtService } from './../../core/services';
 import { UsersService } from '../../core/services/users.service';
+import { JwtService } from '../../core/services/jwt.service';
 
 @Component({
   selector: 'app-log-in',
@@ -15,6 +15,8 @@ export class LogInComponent implements OnInit {
 
   serverError: String;
 
+  emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -24,11 +26,14 @@ export class LogInComponent implements OnInit {
 
   ngOnInit() {
     this.logInForm = this.fb.group({
-      email: [''],
-      password: [''],
+      email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
+      password: ['', Validators.required],
       rememberMe: [false]
     });
   }
+
+  get email(): AbstractControl { return this.logInForm.get('email'); }
+  get password(): AbstractControl { return this.logInForm.get('password'); }
 
   login() {
     this.usersService.logIn(this.logInForm.value).subscribe(

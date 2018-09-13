@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JwtService } from '../core/services/jwt.service';
 
 @Component({
   selector: 'app-my-account',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyAccountComponent implements OnInit {
 
-  constructor() { }
+  currentUser: any;
+
+  constructor(
+    private jwtService: JwtService,
+  ) { }
 
   ngOnInit() {
+    this.currentUser = this.jwtService.currentUser;
   }
 
 }

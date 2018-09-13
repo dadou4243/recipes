@@ -1,7 +1,8 @@
+import { JwtService } from './../../core/services/jwt.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Recipe } from '../../data/recipes.model';
-import { RecipesService } from '../../core/services';
+import { RecipesService } from '../../core/services/recipes.service';
 
 @Component({
   selector: 'app-recipe-card',
@@ -15,7 +16,8 @@ export class RecipeCardComponent implements OnInit {
   @Output() deleted = new EventEmitter<boolean>();
 
   constructor(
-    private recipesService: RecipesService,
+    public recipesService: RecipesService,
+    public jwtService: JwtService,
     private router: Router,
   ) { }
 

@@ -1,4 +1,3 @@
-import { RecipesService } from '../../services/recipes.service';
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { JwtService } from '../../services/jwt.service';
@@ -40,8 +39,6 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private usersService: UsersService,
-    private jwtService: JwtService,
-    private recipesService: RecipesService,
     private router: Router
   ) { }
 
@@ -58,8 +55,7 @@ export class HeaderComponent implements OnInit {
 
   logOut() {
     console.log('logOut');
-    this.jwtService.destroyToken();
-    this.usersService.setLoggedInValue(false);
+    this.usersService.logOut();
     this.router.navigateByUrl('');
   }
 
