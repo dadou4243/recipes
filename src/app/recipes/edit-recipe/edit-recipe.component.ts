@@ -47,7 +47,8 @@ export class EditRecipeComponent implements OnInit {
       picture: [''],
       cost: [''],
       quantity: [''],
-      steps: this.fb.array([])
+      steps: this.fb.array([]),
+      author: ['']
     });
 
     this.getIngredients();
@@ -67,7 +68,8 @@ export class EditRecipeComponent implements OnInit {
         'name': this.recipe.name,
         'duration': this.recipe.duration,
         'category': this.recipe.category,
-        'steps': this.recipe.steps
+        'steps': this.recipe.steps,
+        'author': this.recipe.author
       });
       console.log(this.recipeForm);
       console.log(this.recipeForm.value.category);
@@ -167,7 +169,7 @@ export class EditRecipeComponent implements OnInit {
 
   // Save the edited recipe form to the db
   onSave() {
-    // console.log(this.recipeForm.value);
+    console.log(this.recipeForm.value);
     const req = this.recipeForm.value;
     req['_id'] = this.recipe._id;
     this.recipesService.editRecipe(req).subscribe(

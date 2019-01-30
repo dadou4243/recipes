@@ -37,10 +37,10 @@ export class AddRecipeComponent implements OnInit {
 
   ngOnInit() {
     this.recipeForm = this.fb.group({
-      name: [''],
+      name: ['', Validators.required],
       duration: [''],
-      ingredients: this.fb.array([]),
-      category: [''],
+      ingredients: this.fb.array([], Validators.required),
+      category: ['', Validators.required],
       level: [''],
       picture: [''],
       cost: [''],

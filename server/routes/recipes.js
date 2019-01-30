@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Recipe = require('../models/Recipe');
 const mongoose = require('mongoose');
+const checkIfUserIsAuthor = require('../config/auth.middleware');
 
 //require multer for the file uploads
 var multer = require('multer');
@@ -78,13 +79,14 @@ router.post('/', (req, res, next) => {
         });
 });
 
-router.patch('/:id', (req, res, next) => {
+// Edit a recipe
+router.patch('/:id', checkIfUserIsAuthor, (req, res, next) => {
     console.log(req.body);
     const id = req.body._id;
     Recipe.update({ _id: id }, {
             $set: {
                 name: req.body.name,
-                category: req.body.category.value,
+                category: req.body.category,
                 ingredients: req.body.ingredients,
                 steps: req.body.steps,
                 lastEditedAt: new Date()
@@ -134,7 +136,7 @@ router.post('/search', (req, res, next) => {
         });
 })
 
-// GET all recipes
+// GET recipes for one user
 router.get('/user/:authorId', (req, res, next) => {
     const id = req.params.authorId;
     console.log(id);
